@@ -1,0 +1,46 @@
+You are building an MVP for **Gestura – an AI-for-Good Assistive Platform** that converts children’s personalized gestures into classroom communication.
+
+The project must include:
+1. A Flask backend that:
+   - Receives gesture events from a student’s mobile phone (simulating a wearable sensor).
+   - Stores gesture data (student name, gesture type, timestamp) in memory or Firebase.
+   - Provides two routes:
+       a. /teacher – real-time teacher dashboard
+       b. /parent – summary + analytics dashboard
+
+2. Frontend:
+   - HTML + JS file for mobile “sensor” view that captures motion using `DeviceMotionEvent` and sends gesture events to Flask backend via WebSocket or HTTP.
+   - Teacher dashboard auto-updates when a gesture arrives:
+       - Displays student name, detected gesture, message (“Needs Help”, “Wants Break”).
+       - Plays text-to-speech (TTS) for the message.
+   - Parent dashboard:
+       - Fetches all gestures.
+       - Displays metrics:
+           - Total gestures today
+           - Recognized gestures
+           - Progress over week (bar chart)
+       - Gives textual summary like “Alex tried to communicate 12 times today, showing 25% more activity than last week.”
+
+3. Use Firebase or Flask-SocketIO for real-time data push.
+
+4. Include code comments for:
+   - How phone sends data
+   - How dashboard listens
+   - How to extend with ML gesture model later
+
+5. Folder structure:
+   - /static/js/ → for frontend scripts
+   - /templates/ → for HTML dashboards
+   - main.py → Flask backend
+   - requirements.txt → Flask, Flask-SocketIO, Firebase if used
+
+6. Example Data Flow:
+   - Phone sends gesture `{ student: "Alex", gesture: "wave", timestamp }`
+   - Backend classifies → “Needs Help”
+   - Teacher dashboard updates live, plays voice.
+   - Parent dashboard shows daily + weekly counts.
+
+The final app should let the judge open:
+- `/sensor` → mobile sensor simulation (move phone = gesture)
+- `/teacher` → teacher dashboard (real-time updates)
+- `/parent` → parent dashboard (analytics + progress)
